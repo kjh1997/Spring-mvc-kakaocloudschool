@@ -21,7 +21,6 @@ public class OrderRepository {
 
     public void save(Order order) {
         em.persist(order);
-
     }
 
     public Order findOne(Long id) {
@@ -81,7 +80,6 @@ public class OrderRepository {
         if (StringUtils.hasText(orderSearch.getMemberName())) {
             Predicate name = cb.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
             criteria.add(name);
-
         }
 
         cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
