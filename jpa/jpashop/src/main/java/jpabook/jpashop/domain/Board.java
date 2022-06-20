@@ -2,21 +2,18 @@ package jpabook.jpashop.domain;
 
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "boards")
 @Getter
 @Setter
-@NoArgsConstructor()
 public class Board {
     @Id
     @GeneratedValue

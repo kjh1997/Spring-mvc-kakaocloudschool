@@ -11,10 +11,10 @@ public class BoardForm {
     private Long id;
     private String title;
 
-    private int content;
+    private String content;
     private String author;
 
     private String tag;
-    private LocalDateTime localDateTime;
+
 
 }

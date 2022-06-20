@@ -4,17 +4,15 @@ package jpabook.jpashop.service;
 import jpabook.jpashop.domain.Board;
 import jpabook.jpashop.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class boardService {
+public class BoardService {
     private final BoardRepository boardRepository;
 
     public void saveBoard(Board board) {
