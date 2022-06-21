@@ -34,7 +34,8 @@ public class Order {
 
 
     @OneToOne(cascade = CascadeType.ALL, fetch = LAZY)
-    @JoinColumn(name = "delivery_id")
+
+
     private Delivery delivery;
 
 
