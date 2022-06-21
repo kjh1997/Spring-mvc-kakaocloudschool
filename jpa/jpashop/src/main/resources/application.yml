@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update # update create
+      ddl-auto: create # update create auto
     properties:
       hibernate:
         show_sql: true
@@ -16,9 +16,10 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
-logging:
+
   level:
     org:
       hibernate:
         type: trace
-
+#  logging.level.org.springframework: debug
+#  logging.level.org.springframework.web: debug
