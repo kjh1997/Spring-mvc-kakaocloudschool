@@ -33,7 +33,9 @@ public class BoardRepository {
 
 
     public List<Board> findAll() {
-        return em.createQuery("select b from board b").getResultList();
+        System.out.println("test");
+
+        return em.createQuery("select b from Board b",Board.class).getResultList();
     }
 
     public void save(Board board) {

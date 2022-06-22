@@ -1,16 +1,17 @@
 package api.server.controller.api;
 
+import api.server.domain.Board;
 import api.server.domain.User;
+import api.server.service.BoardService;
 import api.server.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RestController

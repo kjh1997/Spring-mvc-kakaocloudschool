@@ -32,7 +32,7 @@ public class UserRepository {
 
     }
 
-    public User getUserId(Long id) {
+    public User findOne(Long id) {
         return em.find(User.class, id);
     }
 
