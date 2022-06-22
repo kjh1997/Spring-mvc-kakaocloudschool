@@ -1,6 +1,7 @@
 package jpabook.jpashop.repository;
 
 
+import jpabook.jpashop.api.OrderSimpleController;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,9 @@ public class OrderRepository {
 
     public Order findOne(Long id) {
         return em.find(Order.class, id);
+    }
+
+    public List<OrderSimpleController.SimpleOrderDto> findOrderDtos() {
     }
 
     public List<Order> findAllByString(OrderSearch orderSearch) {
@@ -95,4 +99,6 @@ public class OrderRepository {
                         " join fetch o.delivery d", Order.class
         ).getResultList();
     }
+
+
 }
