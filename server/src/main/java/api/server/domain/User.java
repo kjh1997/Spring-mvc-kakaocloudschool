@@ -18,7 +18,7 @@ public class  User {
     private Long id;
     private String name;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "user")
     private List<Board> board = new ArrayList<>();
 

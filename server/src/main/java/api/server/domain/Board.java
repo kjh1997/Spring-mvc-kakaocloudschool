@@ -1,6 +1,7 @@
 package api.server.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,10 +24,12 @@ public class Board   {
     private String context;
     private LocalDateTime localDateTime;
 
+    @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name="category_id")
     private Category category;
 
+    @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
     private User user;
