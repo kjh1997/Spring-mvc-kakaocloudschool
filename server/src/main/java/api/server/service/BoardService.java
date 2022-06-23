@@ -5,6 +5,7 @@ import api.server.controller.api.dto.boardDTO;
 import api.server.domain.Board;
 import api.server.domain.Category;
 import api.server.domain.User;
+import api.server.repository.BoardInterface;
 import api.server.repository.BoardRepository;
 import api.server.repository.CategoryRepository;
 import api.server.repository.UserRepository;
@@ -45,6 +46,10 @@ public class BoardService {
 
         boardRepository.save(board);
     }
+
+//    public List<Board> findByName(String name) {
+//        return boardInterface.findByName(name);
+//    }
 
 
 }

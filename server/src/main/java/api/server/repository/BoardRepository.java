@@ -2,7 +2,9 @@ package api.server.repository;
 
 
 import api.server.domain.Board;
-import api.server.domain.QBoard;
+import static api.server.domain.QBoard.board;
+import static api.server.domain.QUser.user;
+
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -14,13 +16,11 @@ import javax.persistence.EntityManager;
 import java.lang.reflect.Member;
 import java.util.List;
 
-import static api.server.domain.QBoard.board;
-import static api.server.domain.QUser.user;
+
 
 @Repository
 @Transactional
 public class BoardRepository {
-
     private final EntityManager em;
     private JPAQueryFactory query;
     public BoardRepository(EntityManager em) {
@@ -51,7 +51,7 @@ public class BoardRepository {
     public List<Board> findByNameQuerydsl(String name) {
 
         return query
-                .select(board)
+                .select( board)
                 .from(board)
                 .join(board.user, user)
                 .where(statusEq(name))
