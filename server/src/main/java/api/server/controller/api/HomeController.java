@@ -31,10 +31,11 @@ public class HomeController {
     public String logout() {
         return "logout";
     }
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+
+//    @GetMapping("/login")
+//    public String login() {
+//        return "login";
+//    }
 
     @GetMapping("/join")
     public String join() {
@@ -46,7 +47,6 @@ public class HomeController {
     public String joinproc() {
         return "회원가입 완료됨!!";
     }
-
 
 
 }

@@ -22,9 +22,15 @@ public class QUser extends EntityPathBase<User> {
 
     public final ListPath<Board, QBoard> board = this.<Board, QBoard>createList("board", Board.class, QBoard.class, PathInits.DIRECT2);
 
+    public final StringPath email = createString("email");
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath name = createString("name");
+    public final StringPath password = createString("password");
+
+    public final StringPath roles = createString("roles");
+
+    public final StringPath username = createString("username");
 
     public QUser(String variable) {
         super(User.class, forVariable(variable));

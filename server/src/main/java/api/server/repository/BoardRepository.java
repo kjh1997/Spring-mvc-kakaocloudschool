@@ -62,7 +62,7 @@ public class BoardRepository {
         if (name == null) {
             return null;
         }
-        return board.user.name.eq(name);
+        return board.user.username.eq(name);
     }
 
 

@@ -22,6 +22,9 @@ public class UserRepository {
 
     private EntityManager em;
     private JPAQueryFactory query;
+
+
+
     @Autowired
     public UserRepository(EntityManager em) {
         this.em = em;
@@ -31,6 +34,15 @@ public class UserRepository {
         em.persist(user);
 
     }
+
+
+
+
+//    public User FindByUsernameAndPw(String name, String pw) {
+//        return (User) em.createQuery("select u from User u where username= :name and password = :pw")
+//                .setParameter("name",name)
+//                .setParameter("pw",pw);
+//    }
 
     public User findOne(Long id) {
         return em.find(User.class, id);
@@ -43,6 +55,7 @@ public class UserRepository {
                 .from(user)
                 .stream().collect(Collectors.toList());
     }
+
 
 
 }

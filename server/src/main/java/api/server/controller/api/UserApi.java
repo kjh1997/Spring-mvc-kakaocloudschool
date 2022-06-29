@@ -6,10 +6,9 @@ import api.server.service.BoardService;
 import api.server.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -17,19 +16,27 @@ import java.time.LocalDateTime;
 @RestController
 public class UserApi {
     private final UserService userService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/user/save")
     public String createUser(@RequestBody userResponse requestData) {
         User user = new User();
-        user.setName(requestData.getName());
-         userService.save(user);
+        System.out.println();
+        user.setUsername(requestData.getName());
+        user.setEmail(requestData.getEmail());
+        user.setRoles("ROLE_USER");
+        user.setPassword(passwordEncoder.encode(requestData.getPassword()));
+        userService.save(user);
         return "success";
     }
 
+
+
     @GetMapping("/user/userlist")
     public String getUserList() {
-        for(User user : userService.getUserList()){
-            System.out.println("name : " + user.getName());
+
+        for (User user : userService.getUserList()) {
+            System.out.println("name : " + user.getUsername());
         }
         return "success";
     }
@@ -38,9 +45,13 @@ public class UserApi {
     @RequiredArgsConstructor
     static class userResponse {
         private Long id;
+        private String email;
+        private String password;
         private String name;
     }
 
 
-
+//    public String loginTest() {
+//        return "success";
+//    }
 }
