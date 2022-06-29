@@ -1,23 +1,23 @@
 spring:
   datasource:
-    url: jdbc:mysql://database-1.cudzkfqxd95s.ap-northeast-2.rds.amazonaws.com/test_db?characterEncoding=UTF-8&serverTimezone=UTC
-    username: admin
-    password: asdf1234
+    url: jdbc:mysql://localhost:3306/jwt?MVCC=TRUE&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: whdgns1002@
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: create # update create none
+      ddl-auto: update # update create none
     properties:
       hibernate:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+#        temp:
+#          use_jdbc_metadata_defaults: false;
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
 
-  level:
-    org:
-      hibernate:
-        type: trace
+
+
