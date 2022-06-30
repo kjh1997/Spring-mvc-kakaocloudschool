@@ -1,10 +1,8 @@
 package api.server.config.jwt.auth;
 
 import api.server.domain.User;
-import api.server.repository.UserInterFace;
-import api.server.repository.UserRepository;
+import api.server.domain.repository.UserInterFace;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

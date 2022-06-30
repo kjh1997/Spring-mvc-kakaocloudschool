@@ -2,7 +2,7 @@ package api.server.service;
 
 import api.server.domain.Board;
 import api.server.domain.Category;
-import api.server.repository.CategoryRepository;
+import api.server.domain.repository.CategoryRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

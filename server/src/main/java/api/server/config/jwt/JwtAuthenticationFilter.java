@@ -71,14 +71,21 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
         UserPrincipal userPrincipal = (UserPrincipal) authResult.getPrincipal();
+        String jwtToken = generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Access);
+        String jwtTokenRefresh = generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Refresh);
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
+        response.addHeader(JwtProperties.HEADER_STRING_Refresh, JwtProperties.TOKEN_PREFIX + jwtTokenRefresh);
+        System.out.println("jwtToken : " +  jwtToken);
+
+    }
+
+    private String generationToken(UserPrincipal userPrincipal, int expriation_Time) {
         String jwtToken = JWT.create()
                 .withSubject(userPrincipal.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
+                .withExpiresAt(new Date(System.currentTimeMillis() + expriation_Time))
                 .withClaim("id", userPrincipal.getUser().getId())
                 .withClaim("username", userPrincipal.getUser().getUsername())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
-        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
-        System.out.println("jwtToken : " +  jwtToken);
-
+        return jwtToken;
     }
 }

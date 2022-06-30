@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TestController {
     private final UserService userService;
-        @GetMapping("/login")
+    @GetMapping("/login")
     public String login(@RequestBody userResponse requestData) {
         System.out.println(requestData.getPassword());
         return userService.login(requestData.getName(), requestData.getPassword());
     }
 
+
+    @GetMapping("/refresh")
+    public String tokenGeneration(@RequestBody userResponse requestData) {
+
+        return null;
+    }
 
     @GetMapping("/api/v1/user/test")
     public String apiController() {

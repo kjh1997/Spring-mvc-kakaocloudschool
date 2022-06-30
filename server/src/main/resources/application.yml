@@ -16,6 +16,9 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
+  redis:
+    host: localhost
+    port: 6379
 
   level:
     org:

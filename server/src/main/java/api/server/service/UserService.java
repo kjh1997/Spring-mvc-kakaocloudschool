@@ -1,8 +1,8 @@
 package api.server.service;
 
 import api.server.domain.User;
-import api.server.repository.UserInterFace;
-import api.server.repository.UserRepository;
+import api.server.domain.repository.UserInterFace;
+import api.server.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

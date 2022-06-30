@@ -1,4 +1,4 @@
-package api.server.repository;
+package api.server.domain.repository;
 
 
 import api.server.domain.Board;

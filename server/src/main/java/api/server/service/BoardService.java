@@ -5,16 +5,13 @@ import api.server.controller.api.dto.boardDTO;
 import api.server.domain.Board;
 import api.server.domain.Category;
 import api.server.domain.User;
-import api.server.repository.BoardInterface;
-import api.server.repository.BoardRepository;
-import api.server.repository.CategoryRepository;
-import api.server.repository.UserRepository;
-import lombok.Data;
+import api.server.domain.repository.BoardRepository;
+import api.server.domain.repository.CategoryRepository;
+import api.server.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

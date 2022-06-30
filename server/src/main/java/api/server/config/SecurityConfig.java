@@ -2,8 +2,7 @@ package api.server.config;
 
 import api.server.config.jwt.JwtAuthenticationFilter;
 import api.server.config.jwt.JwtAuthorizationFilter;
-import api.server.repository.UserInterFace;
-import api.server.repository.UserRepository;
+import api.server.domain.repository.UserInterFace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

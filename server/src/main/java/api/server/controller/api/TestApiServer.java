@@ -2,7 +2,7 @@ package api.server.controller.api;
 
 import api.server.controller.api.dto.boardDTO;
 import api.server.domain.Board;
-import api.server.repository.BoardInterface;
+import api.server.domain.repository.BoardInterface;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
