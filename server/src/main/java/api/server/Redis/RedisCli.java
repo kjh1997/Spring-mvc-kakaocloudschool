@@ -10,8 +10,8 @@ public class RedisCli extends StringRedisTemplate {
 
     public StringRedisTemplate redisTemplate;
 
-    public void setRedis() {
-        redisTemplate.
-    }
+//    public void setRedis() {
+//        redisTemplate.
+//    }
 
 }
