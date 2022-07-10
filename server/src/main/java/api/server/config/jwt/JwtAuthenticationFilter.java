@@ -73,7 +73,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println("Authentication : "+userPrincipal.getUser().getUsername());
         return authentication;
     }
-
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
@@ -87,15 +86,5 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.addHeader(JwtProperties.HEADER_STRING_Refresh, JwtProperties.TOKEN_PREFIX + jwtTokenRefresh);
         System.out.println("jwtToken : " +  jwtToken);
 
-    }
-
-    public String generationToken(UserPrincipal userPrincipal, int expriation_Time) {
-        String jwtToken = JWT.create()
-                .withSubject(userPrincipal.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + expriation_Time))
-                .withClaim("id", userPrincipal.getUser().getId())
-                .withClaim("username", userPrincipal.getUser().getUsername())
-                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
-        return jwtToken;
     }
 }
