@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://database-1.cudzkfqxd95s.ap-northeast-2.rds.amazonaws.com/test_db?characterEncoding=UTF-8&serverTimezone=UTC
-    username: admin
-    password: asdf1234
+    url: jdbc:mysql://127.0.0.1:3306/test_db?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: whdgns1002@
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

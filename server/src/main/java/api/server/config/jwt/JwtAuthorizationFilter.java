@@ -52,7 +52,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         } catch (TokenExpiredException e) {
             response.addHeader("test", "your token is expired, you need token generation!!");
             chain.doFilter(request, response);
-
             System.out.println("you need token generation!!");
             return;
         } catch (InternalAuthenticationServiceException e) {

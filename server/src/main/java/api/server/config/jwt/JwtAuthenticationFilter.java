@@ -1,13 +1,14 @@
 package api.server.config.jwt;
 
 //import api.server.config.auth.PrincipalDetails;
+import api.server.Redis.RedisService;
 import api.server.config.dto.LoginDataDTO;
 import api.server.config.jwt.auth.UserPrincipal;
-import api.server.domain.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,10 +23,16 @@ import java.io.IOException;
 import java.util.Date;
 
 @RequiredArgsConstructor
-
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    private final AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
+    private RedisService redisService;
+    @Autowired
+    private TokenGenerator tokenGenerator = new TokenGenerator();
 
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, RedisService redisService) {
+        this.redisService = redisService;
+        this.authenticationManager = authenticationManager;
+    }
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
@@ -71,15 +78,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
         UserPrincipal userPrincipal = (UserPrincipal) authResult.getPrincipal();
-        String jwtToken = generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Access);
-        String jwtTokenRefresh = generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Refresh);
+        String jwtToken = tokenGenerator.generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Access);
+        String jwtTokenRefresh = tokenGenerator.generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Refresh);
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
+        redisService.setValues(jwtTokenRefresh, jwtToken);
+        System.out.println(jwtTokenRefresh + "key ||  value " + jwtToken );
+
         response.addHeader(JwtProperties.HEADER_STRING_Refresh, JwtProperties.TOKEN_PREFIX + jwtTokenRefresh);
         System.out.println("jwtToken : " +  jwtToken);
 
     }
 
-    private String generationToken(UserPrincipal userPrincipal, int expriation_Time) {
+    public String generationToken(UserPrincipal userPrincipal, int expriation_Time) {
         String jwtToken = JWT.create()
                 .withSubject(userPrincipal.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + expriation_Time))

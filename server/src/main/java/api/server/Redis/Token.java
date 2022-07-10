@@ -16,6 +16,4 @@ public class Token {
     private String id;
     private String email;
     private String token;
-
-
 }

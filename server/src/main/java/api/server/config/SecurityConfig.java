@@ -1,5 +1,6 @@
 package api.server.config;
 
+import api.server.Redis.RedisService;
 import api.server.config.jwt.JwtAuthenticationFilter;
 import api.server.config.jwt.JwtAuthorizationFilter;
 import api.server.domain.repository.UserInterFace;
@@ -17,6 +18,7 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserInterFace userInterFace;
     private final CorsConfig corsConfig;
+    private final RedisService redisService;
     private final CorsFilter corsFilter;
 //    SessionCreationPolicy.ALWAYS - 스프링시큐리티가항상 세션을 생성
 //    SessionCreationPolicy.IF_REQUIRED - 스프링시큐리티가필요시 생성(기본)
@@ -25,22 +27,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .addFilter(corsConfig.corsFilter())
-            .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .formLogin().disable()
-            .httpBasic().disable()
+                .addFilter(corsConfig.corsFilter())
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .formLogin().disable()
+                .httpBasic().disable()
 
-            .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-            .addFilter(new JwtAuthorizationFilter(authenticationManager(), userInterFace))
-            .authorizeRequests()
-            .antMatchers("/api/v1/user/**")
-            .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-            .antMatchers("/api/v1/manager/**")
-            .access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-            .antMatchers("/api/v1/admin/**")
-            .access("hasRole('ROLE_ADMIN')")
-            .anyRequest().permitAll();
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), redisService))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userInterFace))
+                .authorizeRequests()
+                .antMatchers("/api/v1/user/**")
+                .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/v1/manager/**")
+                .access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/v1/admin/**")
+                .access("hasRole('ROLE_ADMIN')")
+                .anyRequest().permitAll();
 }
 }
