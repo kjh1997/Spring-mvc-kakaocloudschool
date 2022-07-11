@@ -1,4 +1,4 @@
-package api.server.controller;
+package api.server.controller.api;
 
 
 import api.server.controller.api.dto.boardDTO;
@@ -14,17 +14,16 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/board")
 public class BoardApi {
     private final BoardService boardService;
-    @PostMapping("/board/create")
-    public String createUser(@RequestBody boardDTO requestBody
-                             ) {
-
+    @PostMapping("/create")
+    public String createUser(@RequestBody boardDTO requestBody) {
         boardService.save(requestBody);
         return "success";
     }
 
-    @GetMapping("/board/list")
+    @GetMapping("/list")
     public String getBoardList() {
         List<Board> boardList = boardService.getBoardList();
         for (Board board : boardList) {
@@ -33,7 +32,4 @@ public class BoardApi {
         }
         return "success";
     }
-
-
-
 }

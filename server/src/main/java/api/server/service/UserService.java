@@ -29,7 +29,7 @@ public class UserService {
 
     public String login(String id, String pw) {
         User result = this.getUserByName(id);
-        System.out.println("로그인 검증 " + result.toString());
+        System.out.println("로1그인 검증 " + result.toString());
         if ( passwordEncoder.matches( pw, result.getPassword())) {
             return "로그인 성공";
         } else{

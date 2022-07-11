@@ -60,10 +60,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-//        Date date = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(token).getExpiresAt();
-//        System.out.println("jwt data : " + date);
-//        String payload = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(token).getPayload();
-//        System.out.println("payload : " + payload.getBytes(StandardCharsets.UTF_8) );
 
 //        response.addHeader("test", "토큰을 재발급 받으시오.");
 

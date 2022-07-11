@@ -14,12 +14,17 @@ import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/user")
 public class UserApi {
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    @PostMapping("/user/save")
+    @PostMapping("/register")
     public String createUser(@RequestBody userResponse requestData) {
+        if (userService.getUserByName(requestData.getName()) != null) {
+            System.out.println("duplicate username");
+            return "duplicate";
+        }
         User user = new User();
         System.out.println();
         user.setUsername(requestData.getName());
@@ -30,9 +35,7 @@ public class UserApi {
         return "success";
     }
 
-
-
-    @GetMapping("/user/userlist")
+    @GetMapping("/userlist")
     public String getUserList() {
 
         for (User user : userService.getUserList()) {
