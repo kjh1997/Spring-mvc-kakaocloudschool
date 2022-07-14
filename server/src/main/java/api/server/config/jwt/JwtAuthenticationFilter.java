@@ -49,6 +49,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             e.printStackTrace();
         }
         System.out.println("login data parsing : " + loginDataDTO);
+        response.addHeader("username",loginDataDTO.getUsername());
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDataDTO.getUsername(), loginDataDTO.getPassword());
@@ -57,11 +58,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         System.out.println("token generation complete : " + authentication);
-        // authenticate() 함수가 호출 되면 인증 프로바이더가 유저 디테일 서비스의
-        // loadUserByUsername(토큰의 첫번째 파라메터) 를 호출하고
-        // UserDetails를 리턴받아서 토큰의 두번째 파라메터(credential)과
-        // UserDetails(DB값)의 getPassword()함수로 비교해서 동일하면
-        // Authentication 객체를 만들어서 필터체인으로 리턴해준다.
+            // authenticate() 함수가 호출 되면 인증 프로바이더가 유저 디테일 서비스의
+            // loadUserByUsername(토큰의 첫번째 파라메터) 를 호출하고
+            // UserDetails를 리턴받아서 토큰의 두번째 파라메터(credential)과
+            // UserDetails(DB값)의 getPassword()함수로 비교해서 동일하면
+            // Authentication 객체를 만들어서 필터체인으로 리턴해준다.
 
         // Tip: 인증 프로바이더의 디폴트 서비스는 UserDetailsService 타입
         // Tip: 인증 프로바이더의 디폴트 암호화 방식은 BCryptPasswordEncoder
@@ -80,13 +81,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String jwtToken = tokenGenerator.generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Access);
         String jwtTokenRefresh = tokenGenerator.generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Refresh);
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
+
         redisService.setValues(jwtTokenRefresh, jwtToken);
         System.out.println(jwtTokenRefresh + "key ||  value " + jwtToken );
 
         response.addHeader(JwtProperties.HEADER_STRING_Refresh, JwtProperties.TOKEN_PREFIX + jwtTokenRefresh);
         System.out.println("jwtToken : " +  jwtToken);
-
-
 
     }
 }

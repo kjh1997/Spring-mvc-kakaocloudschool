@@ -65,6 +65,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         if(username != null) {
             User user = userInterface.findByusername(username);
+            System.out.println(user.getUsername());
+
+            response.addHeader("username", user.getUsername());
 
             // 인증은 토큰 검증시 끝. 인증을 하기 위해서가 아닌 스프링 시큐리티가 수행해주는 권한 처리를 위해
             // 아래와 같이 토큰을 만들어서 Authentication 체를 강제로 만들고 그걸 세션에 저장!

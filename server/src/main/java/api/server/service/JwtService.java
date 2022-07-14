@@ -1,7 +1,9 @@
-package api.server.config.jwt;
+package api.server.service;
 
 import api.server.Redis.LoginResponseDto;
 import api.server.Redis.RedisService;
+import api.server.config.jwt.JwtProperties;
+import api.server.config.jwt.TokenGenerator;
 import api.server.config.jwt.auth.UserPrincipal;
 import api.server.service.UserService;
 import com.auth0.jwt.JWT;

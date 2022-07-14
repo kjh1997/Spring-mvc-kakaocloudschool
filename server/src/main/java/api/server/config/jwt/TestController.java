@@ -1,16 +1,10 @@
 package api.server.config.jwt;
 
 import api.server.Redis.LoginResponseDto;
-import api.server.Redis.RedisService;
-import api.server.config.jwt.auth.UserPrincipal;
-import api.server.controller.api.UserApi;
+import api.server.service.JwtService;
 import api.server.service.UserService;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +17,7 @@ public class TestController {
     private final JwtService jwtService;
     @PostMapping("/login")
     public String login(@RequestBody userResponse requestData) {
-        System.out.println(requestData.getPassword()+ " ||  " + requestData.getName());
-
-
+        System.out.println(requestData.getPassword());
         return userService.login(requestData.getName(), requestData.getPassword());
     }
 

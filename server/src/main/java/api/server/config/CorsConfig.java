@@ -18,7 +18,12 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
+        config.setMaxAge(3600L);
         config.addAllowedOriginPattern("*");
+        config.addExposedHeader("Authorization_Refresh");
+        config.addExposedHeader("Authorization");
+        config.addExposedHeader("username");
+        config.addExposedHeader("*");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

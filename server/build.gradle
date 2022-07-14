@@ -58,12 +58,13 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+
+
 	implementation group: 'com.auth0', name: 'java-jwt', version: '3.19.2'
 	//querydsl 추가
 	implementation 'com.querydsl:querydsl-jpa'
 //querydsl 추가
 	implementation 'com.querydsl:querydsl-apt'
-
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
