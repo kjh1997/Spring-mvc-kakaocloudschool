@@ -14,4 +14,8 @@ public class GoodsService {
         return goodsRepository.findByName(name);
     }
 
+    public Goods saveGoods(Goods goods) {
+        return goodsRepository.save(goods);
+    }
+
 }

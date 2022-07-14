@@ -8,7 +8,6 @@ import lombok.Setter;
 public class GoodsRequestDto {
     private Long stock;
     private String name;
-    private Long id;
 
 
 }

@@ -11,9 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class GoodsController {
     private final GoodsService goodsService;
+
     @GetMapping("/getgoods")
     public Goods showGoods(@RequestParam String param) {
-
         return goodsService.getGoods(param);
+    }
+
+    @PostMapping("/goods/save")
+    public String saveGoods(@RequestBody GoodsRequestDto goodsRequestDto) {
+        Goods entity = new Goods();
+        entity.setStock(goodsRequestDto.getStock());
+        entity.setName(goodsRequestDto.getName());
+
+        return goodsService.saveGoods(entity).getName();
+
     }
 }

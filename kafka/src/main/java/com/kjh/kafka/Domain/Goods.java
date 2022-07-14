@@ -5,12 +5,16 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 @Getter
 @Setter
 public class Goods {
-    @Column(name = "Category_id",unique = true)
+    @Id
+    @GeneratedValue
+    @Column(name = "goods_id",unique = true)
     private Long id;
     @Column(nullable = false)
     private Long Stock;
