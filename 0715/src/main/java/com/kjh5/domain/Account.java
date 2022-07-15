@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -24,6 +25,7 @@ public class Account {
     private String email;
     @Column(unique = true)
     private String nickname;
+    private String password;
     private boolean emailVerified;
     private LocalDateTime joinedAt;
     private String emailCheckToken;
@@ -40,4 +42,7 @@ public class Account {
     private boolean studyUpdateByWeb;
 
 
+    public void generateEmailCheckToken() {
+        this.emailCheckToken = UUID.randomUUID().toString();
+    }
 }
