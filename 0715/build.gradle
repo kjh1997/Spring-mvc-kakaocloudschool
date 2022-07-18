@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.9'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "com.github.node-gradle.node" version "3.1.0"
 }
 
 group = 'com.kjh'
@@ -16,9 +17,13 @@ configurations {
 
 repositories {
 	mavenCentral()
+	gradlePluginPortal()
 }
 
 dependencies {
+	// npm
+	implementation 'com.github.node-gradle:gradle-node-plugin:3.1.0'
+
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'mysql:mysql-connector-java'
 
@@ -38,6 +43,19 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-tasks.named('test') {
+tasks.named('test' 	) {
 	useJUnitPlatform()
 }
+
+node {
+	version = '16.3.0'
+	download = true
+	nodeModulesDir = file("${projectDir}/src/main/resources/static")
+
+}
+task copyFrontLib(type: Copy) {
+	from "${projectDir}/src/main/resources/static"
+	into "${projectDir}/build/resources/main/static/."
+}
+copyFrontLib.dependsOn npmInstall
+compileJava.dependsOn copyFrontLib
