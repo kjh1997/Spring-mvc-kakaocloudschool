@@ -24,25 +24,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .cors().disable()
-                .authorizeRequests()
-                .mvcMatchers("/", "/login", "/sign-up", "/check-email-token"
-                        , "/email-login", "/check-email-login", "/login-link", "/profile/*").permitAll()
+        http.authorizeRequests()
+                .mvcMatchers("/", "/login", "/sign-up", "/check-email-token",
+                        "/email-login", "/check-email-login", "/login-link").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/profile/*").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .and()
-                .rememberMe()
+                .anyRequest().authenticated();
+
+        http.formLogin()
+                .loginPage("/login").permitAll();
+
+        http.logout()
+                .logoutSuccessUrl("/");
+
+        http.rememberMe()
+                .userDetailsService(accountService)
                 .tokenRepository(tokenRepository());
-
-
     }
 
     private PersistentTokenRepository tokenRepository() {
@@ -50,7 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jdbcTokenRepository.setDataSource(dataSource);
         return jdbcTokenRepository;
     }
-
 
     @Override
     public void configure(WebSecurity web) throws Exception {

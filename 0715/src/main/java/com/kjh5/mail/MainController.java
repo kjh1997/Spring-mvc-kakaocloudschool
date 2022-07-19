@@ -1,4 +1,4 @@
-package com.kjh5.main;
+package com.kjh5.mail;
 
 import com.kjh5.account.CurrentUser;
 import com.kjh5.domain.Account;

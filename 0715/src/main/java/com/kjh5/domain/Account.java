@@ -38,10 +38,11 @@ public class Account {
     private String profileImage;
 
     private boolean studyCreatedByEmail;
-    private boolean studyCreateByWeb;
+    private boolean studyCreatedByWeb;
     private boolean studyEnrollmentResultByEmail;
     private boolean studyEnrollmentResultByWeb;
-    private boolean studyUpdateByWeb;
+    private boolean studyUpdatedByEmail;
+    private boolean studyUpdatedByWeb;
     private LocalDateTime emailCheckTokenGeneratedAt;
     public void completeSignUp() {
 
