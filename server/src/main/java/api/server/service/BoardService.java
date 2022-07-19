@@ -33,6 +33,7 @@ public class BoardService {
     }
 
     public void save(@RequestBody boardDTO boardData) {
+        System.out.println(boardData.getUser_id());
         User user = userRepository.findOne(Long.parseLong(boardData.getUser_id()));
         Category category = categoryRepository.findOne(Long.parseLong(boardData.getCategory_id()));
         Board board = new Board();

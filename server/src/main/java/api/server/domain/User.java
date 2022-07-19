@@ -25,7 +25,7 @@ public class  User {
     private String roles;
 
     @OneToMany(mappedBy = "user")
-    private List<Board> board = new ArrayList<>();
+    private List<Board> board;
     public List<String> getRoleList(){
         if(this.roles.length() > 0){
             return Arrays.asList(this.roles.split(","));

@@ -14,6 +14,8 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Getter
 @Setter
+@NamedEntityGraph(name = "Board.user",
+        attributeNodes = @NamedAttributeNode("user"))
 public class Board   {
     @Id
     @GeneratedValue
