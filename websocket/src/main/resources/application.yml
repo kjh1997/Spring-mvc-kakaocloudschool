@@ -1,22 +1,2 @@
 server:
-  port: 8080
-spring:
-  redis:
-    host: localhost
-    port: 6379
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/websns?characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: whdgns1002@
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  port: 8081

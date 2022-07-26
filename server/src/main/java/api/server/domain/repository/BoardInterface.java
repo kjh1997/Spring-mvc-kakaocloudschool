@@ -14,7 +14,7 @@ public interface BoardInterface extends JpaRepository<Board, Long> {
    Optional<List<Board>> findByTitle(String title);
 
    @Override
-   @EntityGraph(attributePaths = {"user"})
+   @EntityGraph(attributePaths = {"user"} )
    List<Board> findAll();
 
 }
