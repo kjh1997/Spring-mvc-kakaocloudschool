@@ -20,7 +20,7 @@ public class TestApiServer {
     private final BoardInterface boardRepository2;
     @GetMapping("/test/api1")
     public List<Board> testApi() {
-        return boardRepository2.findAll().stream().collect(Collectors.toList());
+        return boardRepository2.findAll();
     }
 
     @GetMapping("/test/api2")
