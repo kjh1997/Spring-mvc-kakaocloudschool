@@ -55,7 +55,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 new UsernamePasswordAuthenticationToken(loginDataDTO.getUsername(), loginDataDTO.getPassword());
 
         System.out.println("login token generation : " + authenticationToken);
-
+        // AuthenticationManager의 가장 일반적인 구현체는 ProviderManager
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         System.out.println("token generation complete : " + authentication);
             // authenticate() 함수가 호출 되면 인증 프로바이더가 유저 디테일 서비스의
@@ -82,12 +82,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String jwtToken = tokenGenerator.generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Access);
         String jwtTokenRefresh = tokenGenerator.generationToken(userPrincipal, JwtProperties.EXPIRATION_TIME_Refresh);
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
-
         redisService.setValues(jwtTokenRefresh, jwtToken);
-        System.out.println(jwtTokenRefresh + "key ||  value " + jwtToken );
-
         response.addHeader(JwtProperties.HEADER_STRING_Refresh, JwtProperties.TOKEN_PREFIX + jwtTokenRefresh);
-        System.out.println("jwtToken : " +  jwtToken);
 
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
+            throws IOException, ServletException {
+        super.unsuccessfulAuthentication(request, response, failed);
     }
 }

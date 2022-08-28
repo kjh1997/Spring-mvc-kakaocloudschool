@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class UserPrincipalService implements UserDetailsService {
     private final UserInterFace userInterFace;
 
-    @Override
+//    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("principal entry : "+ username);
         User user = userInterFace.findByusername(username);
