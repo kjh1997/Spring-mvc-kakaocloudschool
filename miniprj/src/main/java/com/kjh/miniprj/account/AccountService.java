@@ -16,13 +16,14 @@ public class AccountService {
     public int saveAccount(AccountDTO accountDTO) {
         int re = findAccount(accountDTO.getEmail());
         if (re == 0) {
-            re = findAccount(accountDTO.getNickname());
+            re = findAccount(accountDTO.getUsername());
         }
         if (re == 0){
             Account account = new Account();
             account.setEmail(accountDTO.getEmail());
-            account.setNickname(accountDTO.getNickname());
+            account.setNickname(accountDTO.getUsername());
             account.setPassword(bCryptPasswordEncoder.encode(accountDTO.getPassword()));
+            account.setRoles("ROLE_USER");
             accountRepository.save(account);
             return 1;
         }

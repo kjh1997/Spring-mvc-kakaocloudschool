@@ -23,10 +23,10 @@ spring:
     org:
       hibernate:
         type: trace
-elasticsearch:
-  host: 52.44.127.67
-  port: 9200
-
-
-kafka:
-  serverIP: 52.44.127.67:9092
+#elasticsearch:
+#  host: 52.44.127.67
+#  port: 9200
+#
+#
+#kafka:
+#  serverIP: 52.44.127.67:9092

@@ -7,20 +7,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-@Component
-@RequiredArgsConstructor
-public class LoginAuthenticationProvider implements AuthenticationProvider {
-    private final AccountRepository accountRepository;
+//@Component
+//@RequiredArgsConstructor
+public class LoginAuthenticationProvider {
+//    private final AccountRepository accountRepository;
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = authentication.getName();
-        String password = authentication.isAuthenticated().
-        return null;
-    }
-
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return false;
-    }
+//    @Override
+//    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+//        String username = authentication.getName();
+//        String password = authentication.
+//        return null;
+//    }
+//
+//    @Override
+//    public boolean supports(Class<?> authentication) {
+//        return false;
+//    }
 }

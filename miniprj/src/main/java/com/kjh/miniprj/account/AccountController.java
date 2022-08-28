@@ -1,6 +1,9 @@
 package com.kjh.miniprj.account;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -11,9 +14,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @GetMapping("/")
+    public String getHome() {
+        System.out.println(SecurityContextHolder.getContext().toString());
+
+        return "index";
+    }
+    @GetMapping("/test")
+    public String getHome2(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : account") Account account) {
+        System.out.println(account.getNickname());
+
+        return "index";
+    }
+    @GetMapping("/login")
+    public String loginUserForm() {
+        return "loginForm";
+    }
 
     @GetMapping("/register")
     public String SignUpAccount(Model model) {
+
         model.addAttribute("account", new AccountDTO());
         return "registerForm";
     }

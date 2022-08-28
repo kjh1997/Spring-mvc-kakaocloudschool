@@ -19,7 +19,7 @@ public class Account {
     private String email;
     private String password;
     private LocalDateTime joined_at;
-
+    private String roles;
     public Account() {
         this.joined_at = LocalDateTime.now();
     }
