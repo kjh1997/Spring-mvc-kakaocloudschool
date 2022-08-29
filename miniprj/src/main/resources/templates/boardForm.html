@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head">
+    <title>Review</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css" />
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/node_modules/jdenticon/dist/jdenticon.min.js"></script>
+    <style>
+        .container {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<form role="form" th:object="${boardDTO}" th:action="@{/board/new}" method="post" accept-charset="UTF-8">
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">상세 리뷰 작성</label>
+        <input class="form-control" th:field="*{title}" rows="3" type="text" required name="title"></input>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">상세 리뷰 작성</label>
+        <textarea class="form-control" th:field="*{context}" id="exampleFormControlTextarea1" rows="3" required name="comment"></textarea>
+    </div>
+        <div style="float: right;">
+        <button type="submit" class="btn btn-dark " onclick="checkStar()">게시물 등록</button>
+        </div>
+
+</form>
+</body>
+</html>

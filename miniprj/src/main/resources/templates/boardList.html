@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body>
+<div th:replace="fragments.html :: navbar"></div>
+
+
+
+<ul class="list-group list-group-horizontal" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+    <li class="list-group-item" style="width:5%">Num</li>
+    <li class="list-group-item" style="width:60%">title</li>
+    <li class="list-group-item" style="width:15%">create</li>
+    <li class="list-group-item" style="width:10%">Author</li>
+</ul>
+<ul class="list-group list-group-horizontal" style="margin-left: 10px; margin-right: 10px;" th:each="post : ${posts}">
+    <li class="list-group-item" style="width:5%" ><span th:text="*{post.id}"></span></li>
+    <li class="list-group-item" style="width:60%"><span th:text="*{post.title}"></span></li>
+    <li class="list-group-item" style="width:15%"><span th:text="*{post.create_at}"></span></li>
+    <li class="list-group-item" style="width:10%"><span th:text="*{post.account.nickname}"></span></li>
+</ul>
+<!--<ul class="list-group list-group-horizontal" style="margin-left: 10px; margin-right: 10px;"  th:each="num : ${#numbers.sequence(1,5)}">-->
+<!--    <li class="list-group-item" style="width:5%">{{id}}</li>-->
+<!--    <li class="list-group-item" style="width:60%">{{title}}</li>-->
+<!--    <li class="list-group-item" style="width:15%">{{create_at}}</li>-->
+<!--    <li class="list-group-item" style="width:10%">{{account}}</li>-->
+<!--</ul>-->
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+
+
+</body>
+</html>
