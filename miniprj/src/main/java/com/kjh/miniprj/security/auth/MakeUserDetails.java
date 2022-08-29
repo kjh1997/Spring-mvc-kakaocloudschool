@@ -2,9 +2,11 @@ package com.kjh.miniprj.security.auth;
 
 import com.kjh.miniprj.account.Account;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 public class MakeUserDetails implements UserDetails {
     private Account account;
@@ -20,7 +22,7 @@ public class MakeUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

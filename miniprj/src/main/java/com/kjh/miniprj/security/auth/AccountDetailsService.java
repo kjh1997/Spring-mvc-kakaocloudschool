@@ -20,10 +20,11 @@ public class AccountDetailsService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("login start");
+
         Account account = accountRepository.findByNickname(username);
-        System.out.println(account.getNickname());
-        System.out.println("test" + bCryptPasswordEncoder.matches(account.getPassword(), bCryptPasswordEncoder.encode("bbbb")));
+        if (account == null) {
+            throw new UsernameNotFoundException(username);
+        }
         return new MakeUserDetails(account);
     }
 }

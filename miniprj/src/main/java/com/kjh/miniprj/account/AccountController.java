@@ -1,5 +1,6 @@
 package com.kjh.miniprj.account;
 
+import com.kjh.miniprj.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,19 +20,21 @@ public class AccountController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/")
-    public String getHome() {
-        System.out.println(SecurityContextHolder.getContext().toString());
-
+    public String getHome(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : account") Account account) {
         return "index";
     }
     @GetMapping("/test")
-    public String getHome2(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : account") Account account) {
-        System.out.println(account.getNickname());
-
+    public String getHome2() {
         return "index";
     }
+
     @GetMapping("/login")
-    public String loginUserForm() {
+    public String loginUserForm(@RequestParam(value = "msg", required = false) String error, Model model) {
+        if (error != null) {
+            model.addAttribute("LoginFailMessage", error);
+        }
+
+
         return "loginForm";
     }
 

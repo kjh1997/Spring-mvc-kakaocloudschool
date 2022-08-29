@@ -6,10 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjh.miniprj.account.AccountDTO;
 import com.kjh.miniprj.security.auth.MakeUserDetails;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -30,8 +30,6 @@ public class SecurityFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         AccountDTO accountDTO = new AccountDTO();
-        System.out.println(request.getParameter("username"));
-        System.out.println(request.getParameter("password"));
         try {
             accountDTO.setUsername(request.getParameter("username"));
             accountDTO.setPassword(request.getParameter("password"));
@@ -45,29 +43,27 @@ public class SecurityFilter extends UsernamePasswordAuthenticationFilter {
                 new UsernamePasswordAuthenticationToken(
 
                         accountDTO.getUsername(),
-                        accountDTO.getPassword());
+                        accountDTO.getPassword()
+                );
         System.out.println("token");
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
         MakeUserDetails makeUserDetails = (MakeUserDetails) authentication.getPrincipal();
+        System.out.println(makeUserDetails.getAccount().getNickname());
         return authentication;
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         log.info("Login success");
-        MakeUserDetails makeUserDetails = (MakeUserDetails) authResult.getPrincipal();
         SecurityContextHolder.getContext().setAuthentication(authResult);
-        System.out.println("?????????????????"+ SecurityContextHolder.getContext().toString());
+
+        response.sendRedirect("/");
     }
 
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        log.info("login fail");
-        System.out.println(failed.getMessage());
-        System.out.println(failed.getStackTrace());
-        System.out.println(failed.toString());
-        System.out.println(failed.getCause());
+        response.sendRedirect("/login?msg=NotFound.");
     }
 }

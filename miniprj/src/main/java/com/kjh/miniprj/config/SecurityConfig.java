@@ -1,6 +1,7 @@
 package com.kjh.miniprj.config;
 
 import com.kjh.miniprj.security.SecurityFilter;
+import com.kjh.miniprj.security.auth.AuthFailureHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new SecurityFilter(authenticationManager())).authorizeRequests()
                 .anyRequest().permitAll()
                 .and()
-                .formLogin().loginPage("/login");
+                .formLogin()
+                .loginPage("/login");
         http.logout()
                 .logoutSuccessUrl("/");
     }
