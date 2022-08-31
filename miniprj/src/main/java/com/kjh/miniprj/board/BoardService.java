@@ -2,6 +2,7 @@ package com.kjh.miniprj.board;
 
 import com.kjh.miniprj.account.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,8 @@ public class BoardService {
 //    }
 
 
-    public Object pageList(Pageable pageable) {
-        return boardRepository.findAll(pageable);
+    public Page<Board> pageList(Pageable pageable) {
+        Page<Board> all = boardRepository.findAll(pageable);
+        return all;
     }
 }

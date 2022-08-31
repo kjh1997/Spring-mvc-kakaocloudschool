@@ -4,6 +4,7 @@ package com.kjh.miniprj.board;
 import com.kjh.miniprj.account.Account;
 import com.kjh.miniprj.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -23,6 +24,9 @@ public class BoardController {
 
     @GetMapping("/new")
     public String getBoardForm(@CurrentUser Account account, Model model) {
+        if (account == null) {
+            return "redirect:/board/list";
+        }
         model.addAttribute("boardDTO", new BoardDTO());
         return "boardForm";
     }
@@ -36,10 +40,11 @@ public class BoardController {
 
     @GetMapping("/list")
     public String getBoardList(@CurrentUser Account account, Model model,@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        model.addAttribute("name", account.getNickname());
-        model.addAttribute("posts", boardService.pageList(pageable));
-        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-        model.addAttribute("next", pageable.next().getPageNumber());
+        if (account != null) {
+            model.addAttribute("name", account.getNickname());
+        }
+        Page<Board> boardPage = boardService.pageList(pageable);
+        model.addAttribute("boards", boardPage);
         return "boardList";
     }
 }
